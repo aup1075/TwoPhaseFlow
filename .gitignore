@@ -104,6 +104,9 @@ doc/Doxygen/DTAGS
 # Ignore the test directory
 /tutorialsTest
 
+# Mac System Files
+.DS_Store
+
 # python
 __pychache__
 *.pyc
