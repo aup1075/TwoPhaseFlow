@@ -10,7 +10,7 @@
 #include "turbulentTransportModel.H"
 #include "pimpleControl.H"
 #include "fvOptions.H"
-#include "CorrectPhi.H"
+#include "/usr/lib/openfoam/openfoam2206/src/finiteVolume/cfdTools/general/CorrectPhi/CorrectPhi.H"
 #include "fvcSmooth.H"
 #include "surfaceForces.H"
 
