@@ -106,7 +106,7 @@ doc/Doxygen/DTAGS
 
 # Mac System Files
 .DS_Store
-
+.bash_history
 # python
 __pychache__
 *.pyc
