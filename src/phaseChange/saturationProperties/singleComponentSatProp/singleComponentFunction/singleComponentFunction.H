@@ -3,7 +3,7 @@
 -------------------------------------------------------------------------------
 License
     This file is part of the VoFLibrary source code library, which is an
-	unofficial extension to OpenFOAM.
+    unofficial extension to OpenFOAM.
     OpenFOAM is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -26,8 +26,8 @@ SourceFiles
 
 \*---------------------------------------------------------------------------*/
 
-#ifndef ClausiusClapeyron_H
-#define ClausiusClapeyron_H
+#ifndef singleComponentFunction_H
+#define singleComponentFunction_H
 
 #include "typeInfo.H"
 #include "singleComponentSatProp.H"
@@ -41,75 +41,64 @@ SourceFiles
 namespace Foam
 {
 
-/*---------------------------------------------------------------------------*\
-                Class singleComponentFunction Declaration
-\*---------------------------------------------------------------------------*/
+    /*---------------------------------------------------------------------------*\
+                    Class singleComponentFunction Declaration
+    \*---------------------------------------------------------------------------*/
 
-class singleComponentFunction
-    : public singleComponentSatProp
-{
+    class singleComponentFunction
+        : public singleComponentSatProp
+    {
 
-private:
+    private:
+        //-
+        autoPtr<Function1<scalar>> pSatFunc_;
 
-    //-
-    autoPtr<Function1<scalar>>   pSatFunc_;
+        //-
+        autoPtr<Function1<scalar>> TSatFunc_;
 
-    //-
-    autoPtr<Function1<scalar>>  TSatFunc_;
+        //-
+        autoPtr<Function1<scalar>> LFunc_;
 
-    //-
-    autoPtr<Function1<scalar>>  LFunc_;
-
-
-
-    // Private Member Functions
+        // Private Member Functions
 
         //- Disallow copy construct
-        singleComponentFunction(const singleComponentFunction&);
+        singleComponentFunction(const singleComponentFunction &);
 
         //- Disallow default bitwise assignment
-        void operator=(const singleComponentFunction&);
+        void operator=(const singleComponentFunction &);
 
+    public:
+        //- Runtime type information
+        TypeName("function");
 
-public:
-
-    //- Runtime type information
-    TypeName("function");
-
-
-    // Constructors
+        // Constructors
 
         //- Construct from components
-        singleComponentFunction
-        (
-            const fvMesh& mesh,
-            const dictionary& dict
-        );
+        singleComponentFunction(
+            const fvMesh &mesh,
+            const dictionary &dict);
 
+        //- Destructor
+        virtual ~singleComponentFunction()
+        {
+        }
 
-    //- Destructor
-    virtual ~singleComponentFunction()
-    {}
-
-
-    // Member Functions
+        // Member Functions
 
         //- Read the transportProperties dictionary and update
         //-
-        virtual scalar satP (scalar T) const;
+        virtual scalar satP(scalar T) const;
 
         //-
-        virtual scalar satT (scalar p) const;
+        virtual scalar satT(scalar p) const;
 
         //
-        virtual scalar satL (scalar p) const;
-
+        virtual scalar satL(scalar p) const;
 
         // virtual bool read();
-};
+    };
 
-
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 } // End namespace Foam
 
